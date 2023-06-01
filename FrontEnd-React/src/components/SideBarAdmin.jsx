@@ -3,7 +3,9 @@ import {
     FaBars,
     FaTh,
     FaUserAlt,
-    FaMandalorian
+    FaMandalorian,
+    FaBuromobelexperte,
+    FaRegListAlt
 } from "react-icons/fa"
 import '../styles/SideBar.css'
 import { useState } from 'react';
@@ -18,14 +20,24 @@ const SideBarAdmin = () => {
             icon: <FaMandalorian/>
         },  
         {
-            path:"/homeAdmin",
-            name:"Solicitar Aula",
-            icon: <FaTh/>
+            path:"/homeAdmin/usuarios",
+            name:"Gestionar Usuarios",
+            icon: <FaUserAlt/>
         },
         {
-            path:"/homeAdmin",
-            name:"Perfil",
-            icon: <FaUserAlt/>
+            path:"/homeAdmin/salones",
+            name:"Gestionar Salones",
+            icon: <FaTh />
+        },
+        {
+            path:"/homeAdmin/salonesUsados",
+            name:"Salones en uso",
+            icon: <FaBuromobelexperte />
+        },  
+        {
+            path:"/homeAdmin/historial",
+            name:"Historial de salones",
+            icon: <FaRegListAlt />
         },
     ]
     return (

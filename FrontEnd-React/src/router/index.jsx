@@ -12,6 +12,10 @@ import Login from "../pages/Login";
 
 import LayoutAdmin from "../layout/LayoutAdmin";
 import HomeAdmin from "../pages/HomeAdmin";
+import Usuarios from "../pages/usuarios";
+import Salones from "../pages/Salones";
+import SalonesEnUso from "../pages/SalonesEnUso";
+import HistorialSalones from "../pages/HistorialSalones";
 
 export const router = createBrowserRouter([
     {
@@ -53,10 +57,26 @@ export const router = createBrowserRouter([
          element: <LayoutAdmin />,
          errorElement: <NotFound />,
          children: [
-             {
+            {
                  index: true,
                  element: <HomeAdmin />,                
-             },
+            },
+            {
+                path: '/homeAdmin/usuarios',
+                element: <Usuarios />,
+            },
+            {
+                path: '/homeAdmin/salones',
+                element: <Salones />,
+            },
+            {
+                path: '/homeAdmin/salonesUsados',
+                element: <SalonesEnUso />,
+            },
+            {
+                path: '/homeAdmin/historial',
+                element: <HistorialSalones />,
+            },
         ]
      },
 
