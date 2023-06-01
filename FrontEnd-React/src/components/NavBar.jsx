@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom'
 import '../styles/NavBar.css';
 import Cookies from "universal-cookie";
 import { Component } from 'react';
@@ -12,7 +11,7 @@ class NavBar extends Component {
         cookies.remove("nombre", {path:"/"});
         cookies.remove("apellidos", {path:"/"});
         cookies.remove("username", {path:"/"});
-        window.location.href="./";
+        window.location.href="/";
     }
 
     componentDidMount(){
