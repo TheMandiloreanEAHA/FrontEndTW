@@ -8,8 +8,8 @@ main{
 }
 
 .sidebar{
-    background: #000;
-    color: #fff;
+    background: #28ad56;
+    color: #18529d;
     height: 100vh;
     width: 245px;
     transition: all 0.5s;
@@ -25,7 +25,6 @@ main{
 .bars{
     display: flex;
     font-size: 25px;
-    margin-left: 30px;
 }
 .link{
     display: flex;
@@ -36,8 +35,8 @@ main{
     text-decoration: none;
 }
 .link:hover{
-    background: lightskyblue;
-    color: #000;
+    background: #18529d;
+    color: #fff;
     transition: all 0.5s;
 }
 /* .active{
