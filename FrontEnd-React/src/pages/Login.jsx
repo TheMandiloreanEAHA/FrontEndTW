@@ -1,16 +1,16 @@
 import { Component } from 'react';
 import '../styles/Login.css';
 import axios from 'axios';
-import md5 from 'md5';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 
-const baseUrl = "http://localhost:3001/usuarios";
-const cookies = new Cookies();
+// const baseUrl = "http://localhost:3001/usuarios";
+const baseUrl = "https://intellidoorbackend-production.up.railway.app/login";
+// const cookies = new Cookies();
 
 class Login extends Component{ 
     state={
         form:{
-            username: '',
+            email: '',
             password: ''
         }
     }
@@ -25,38 +25,54 @@ class Login extends Component{
     }
 
     iniciarSesion=async()=>{
-        await axios.get(baseUrl, {params: {username: this.state.form.username, password:md5(this.state.form.password)}})
+        // await axios.get(baseUrl, {params: {username: this.state.form.username, password:(this.state.form.password)}})
+        console.log(this.state.form.email)
+        console.log(this.state.form.password)
+
+        let email = this.state.form.email;
+        let pwsd = this.state.form.password;
+
+        
+         await axios.post(baseUrl, {email: email, password: pwsd})
+        //  console.log(this.state)
         .then(response=>{
             return response.data;
         })
         .then(response=>{
             if(response.length>0){
-                var respuesta = response[0];
-                cookies.set('id', respuesta.id, {path:'/'});
-                cookies.set('nombre', respuesta.nombre, {path:'/'});
-                cookies.set('apellidos', respuesta.apellidos, {path:'/'});
-                cookies.set('username', respuesta.username, {path:'/'});
-                alert(`Bienvenido ${respuesta.nombre} ${respuesta.apellidos}`);
-                if(cookies.get("username")=="Admin"){
+                console.log(response);
+                var respuesta = response[1];
+                if(respuesta.admin == 1){
                     window.location.href="./homeAdmin";
                 }else{
                     window.location.href="./home";
                 }
 
-            }else{
-                alert("El usuario o contraseña no son correctos");
-            }
+                // cookies.set('id', respuesta.id, {path:'/'});
+                // cookies.set('nombre', respuesta.nombre, {path:'/'});
+                // cookies.set('apellidos', respuesta.apellidos, {path:'/'});
+                // cookies.set('username', respuesta.username, {path:'/'});
+                // alert(`Bienvenido ${respuesta.nombre} ${respuesta.apellidos}`);
+                // if(cookies.get("username")=="Admin"){
+                //     window.location.href="./homeAdmin";
+                // }else{
+                //     window.location.href="./home";
+                // }
+
+            }//else{
+            //     alert("El usuario o contraseña no son correctos");
+            // }
         })
         .catch(error=>{
             console.log(error);
         })
     }
 
-    componentDidMount(){
-        if (cookies.get("username")) {
-            window.location.href="./home";
-        }
-    }
+    // componentDidMount(){
+    //     if (cookies.get("username")) {
+    //         window.location.href="./home";
+    //     }
+    // }
 
     render(){
         return (
@@ -65,7 +81,7 @@ class Login extends Component{
                     <div className="form-group">
                         <label>Usuario: </label>
                         <br />
-                        <input type="text" className="form-control" name="username" onChange={this.handleChange}/>
+                        <input type="text" className="form-control" name="email" onChange={this.handleChange}/>
                         <br />
                         <label>Contraseña: </label>
                         <br />
