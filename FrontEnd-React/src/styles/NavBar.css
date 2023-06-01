@@ -1,0 +1,10 @@
+.contenedor{
+    display: flex;
+}
+
+.navBar{
+    background: #000;
+    color: #fff;
+    height: 100vh;
+    width: 245px;
+}
