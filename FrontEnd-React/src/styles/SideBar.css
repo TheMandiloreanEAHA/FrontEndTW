@@ -1,5 +1,5 @@
 .contenedor{
-    display: flex;
+    display: inline;
 }
 
 main{
@@ -48,7 +48,7 @@ main{
 }
 
 .sidebarAdmin{
-    background: #055bbd;
+    background: #005df4;
     color: #fff;
     height: 100vh;
     width: 245px;
@@ -64,7 +64,7 @@ main{
     text-decoration: none;
 }
 .linkAdmin:hover{
-    background: #ed7c03;
+    background: #ee8b00;
     color: #000;
     transition: all 0.5s;
 }

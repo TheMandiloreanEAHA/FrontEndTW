@@ -10,16 +10,18 @@ const LayoutPublic = () => {
     return (
         <>
             <div className="contenidoRoot">
-                <SideBar />
-                {/* <NavBar /> */}
-                <main className="main_container">
-                    {/* Esto es el loading de espera */}
-                    {navigation.state == "loading" && (
-                        <div className="alert alert-info my-5">Loading...</div>
-                    )}
-                    {/* Esto lo que hace es traer lo de la página que deseemos */}
-                    <Outlet />
-                </main>
+                <NavBar />
+                <div className="info">
+                    <SideBar />
+                    <main className="main_container">
+                        {/* Esto es el loading de espera */}
+                        {navigation.state == "loading" && (
+                            <div className="alert alert-info my-5">Loading...</div>
+                        )}
+                        {/* Esto lo que hace es traer lo de la página que deseemos */}
+                        <Outlet />
+                    </main>
+                </div>
             </div>
         </>
     );

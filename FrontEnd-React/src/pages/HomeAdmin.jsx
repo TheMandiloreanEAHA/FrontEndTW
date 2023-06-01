@@ -1,17 +1,11 @@
 import { Component } from "react";
 import Cookies from "universal-cookie";
+import '../styles/HomeAdmin.css';
 
 const cookies = new Cookies();
 
 class HomeAdmin extends Component { 
-    cerrarSesion=()=>{
-        cookies.remove("id", {path:"/"});
-        cookies.remove("nombre", {path:"/"});
-        cookies.remove("apellidos", {path:"/"});
-        cookies.remove("username", {path:"/"});
-        window.location.href="./";
-    }
-
+   
     componentDidMount(){
         if (!cookies.get("username")) {
             window.location.href="./";
@@ -25,11 +19,7 @@ class HomeAdmin extends Component {
         console.log("username: "+cookies.get("username"));
     
         return (
-            <div>
-                <h1>HOME DEL ADMINISTRADOR</h1>
-                <br />
-                <button onClick={()=>this.cerrarSesion()}>Cerrar Sesión</button>
-            </div>
+            <h1>Hola Admin</h1>
             
         );
     }

@@ -3,6 +3,12 @@
     padding: 0;
     text-decoration: none;
 }
-.contenidoRoot{
+.info{
+    margin: 0;
+    padding: 0;
     display: flex;
+}
+.main_container{
+    margin: 0;
+    padding: 0;
 }

@@ -4,19 +4,6 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class Home extends Component { 
-    cerrarSesion=()=>{
-        cookies.remove("id", {path:"/"});
-        cookies.remove("nombre", {path:"/"});
-        cookies.remove("apellidos", {path:"/"});
-        cookies.remove("username", {path:"/"});
-        window.location.href="./";
-    }
-
-    componentDidMount(){
-        if (!cookies.get("username")) {
-            window.location.href="./";
-        }
-    }
 
     render(){
         console.log("id: "+cookies.get("id"));
@@ -28,7 +15,6 @@ class Home extends Component {
             <div>
                 <h1>HOME</h1>
                 <br />
-                <button onClick={()=>this.cerrarSesion()}>Cerrar Sesión</button>
             </div>
             
         );
