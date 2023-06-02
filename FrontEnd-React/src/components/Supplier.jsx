@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import Cookies from "universal-cookie";
 import axios from "axios";
@@ -16,7 +16,8 @@ const Supplier = (props) => {
 
   const [data, setData] = useState([]);
 
-  axios
+  useEffect(()=>{
+    axios
     .get(url, config)
     .then((response) => {
       return response.data;
@@ -31,10 +32,12 @@ const Supplier = (props) => {
         setData(aux)
       });
     })
+  },[])
+
+  console.log(data)
 
   const handleSelectChange = ( { value } ) => {
     const {dataSch, setDataSch} = props
-
     axios
     .get(url2, config)
     .then((response) => {
@@ -47,9 +50,6 @@ const Supplier = (props) => {
           aux.push(element)
         }
         setDataSch(aux)
-        dataSch.forEach(element => {
-          console.log(element)
-        })
       });
     })
   }
@@ -57,7 +57,6 @@ const Supplier = (props) => {
   return (
     <div className="Supplier-container">
       <Select options={ data } onChange={ handleSelectChange }/>
-      {/* {data.map(item => <h1>{item.num}</h1>)} */}
     </div>
   );
 };
