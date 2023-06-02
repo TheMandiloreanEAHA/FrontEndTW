@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import '../styles/Login.css';
 import axios from 'axios';
-// import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie';
+import jwtDecode from 'jwt-decode';
 
-// const baseUrl = "http://localhost:3001/usuarios";
 const baseUrl = "https://intellidoorbackend-production.up.railway.app/login";
-// const cookies = new Cookies();
+const cookies = new Cookies();
 
 class Login extends Component{ 
     state={
@@ -25,29 +25,24 @@ class Login extends Component{
     }
 
     iniciarSesion=async()=>{
-        // await axios.get(baseUrl, {params: {username: this.state.form.username, password:(this.state.form.password)}})
-        console.log(this.state.form.email)
-        console.log(this.state.form.password)
-
         let email = this.state.form.email;
         let pwsd = this.state.form.password;
-
         
-         await axios.post(baseUrl, {email: email, password: pwsd})
-        //  console.log(this.state)
-        .then(response=>{
+        await axios.post(baseUrl, {email: email, password: pwsd})
+        .then(response => {
             return response.data;
         })
-        .then(response=>{
-            if(response.length>0){
-                console.log(response);
-                var respuesta = response[1];
-                if(respuesta.admin == 1){
+        .then(response => {
+            if(response.length > 0){
+                const { admin } = response[1];
+                const { token } = response[0];
+                if(admin == 1){
                     window.location.href="./homeAdmin";
                 }else{
                     window.location.href="./home";
                 }
-
+                cookies.set('token', token, {path:'/'});
+                cookies.set('admin', admin, {path:'/'});
                 // cookies.set('id', respuesta.id, {path:'/'});
                 // cookies.set('nombre', respuesta.nombre, {path:'/'});
                 // cookies.set('apellidos', respuesta.apellidos, {path:'/'});
@@ -90,9 +85,8 @@ class Login extends Component{
                         <button className="btn btn-primary" onClick={()=> this.iniciarSesion()}>Iniciar sesión</button>
                     </div>
                 </div>
-                
             </div>
         );
     }
- }
- export default Login;
+}
+export default Login;

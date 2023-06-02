@@ -1,15 +1,18 @@
 import { Component } from "react";
 import Cookies from "universal-cookie";
+import axios from 'axios';
 
-const cookies = new Cookies();
+// const cookies = new Cookies();
 
-class Home extends Component { 
+class Home extends Component {
+
+    
 
     render(){
-        console.log("id: "+cookies.get("id"));
-        console.log("nombre: "+cookies.get("nombre"));
-        console.log("apellidos: "+cookies.get("apellidos"));
-        console.log("username: "+cookies.get("username"));
+        // console.log("id: "+cookies.get("id"));
+        // console.log("nombre: "+cookies.get("nombre"));
+        // console.log("apellidos: "+cookies.get("apellidos"));
+        // console.log("username: "+cookies.get("username"));
     
         return (
             <div>
@@ -19,5 +22,6 @@ class Home extends Component {
             
         );
     }
- }
- export default Home;
+}
+
+export default Home;

@@ -24,42 +24,42 @@ export const router = createBrowserRouter([
         errorElement: <NotFound />,
     },
     {
-         path: '/home',
-         element: <LayoutPublic />,
-         errorElement: <NotFound />,
-         children: [
-             {
-                 index: true,
-                 element: <Home />,                
-             },
-             {
-                 path: '/home/about',
-                 element: <About />,                
-             },
-             {
-                 path: '/home/blog',
-                 element: <Blog />,
-                
-             },
-             {
-                 path: '/home/solicitarAulas',
-                 element: <SolicitarAulas />,
-             },
-             {
-                 path: '/home/perfil',
-                 element: <Perfil />,
-             },
-            
-         ]
-     },
-     {
-        path: '/homeAdmin',
-         element: <LayoutAdmin />,
-         errorElement: <NotFound />,
-         children: [
+        path: '/home',
+        element: <LayoutPublic />,
+        errorElement: <NotFound />,
+        children: [
             {
-                 index: true,
-                 element: <HomeAdmin />,                
+                index: true,
+                element: <Home />,                
+            },
+            {
+                path: '/home/about',
+                element: <About />,                
+            },
+            {
+                path: '/home/blog',
+                element: <Blog />,
+                
+            },
+            {
+                path: '/home/solicitarAulas',
+                element: <SolicitarAulas />,
+            },
+            {
+                path: '/home/perfil',
+                element: <Perfil />,
+            },
+            
+        ]
+    },
+    {
+        path: '/homeAdmin',
+        element: <LayoutAdmin />,
+        errorElement: <NotFound />,
+        children: [
+            {
+                index: true,
+                element: <HomeAdmin />,                
             },
             {
                 path: '/homeAdmin/usuarios',
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
                 element: <HistorialSalones />,
             },
         ]
-     },
+    },
 
 ]);
 

@@ -23,14 +23,14 @@ class NavBar extends Component {
     render(){
         return (
             <div className="contenedorNav">
-                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
+                <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href="#">
                             {/* <img src="" class="rounded-pill"/> */}
                             <img src={Logo} alt="logo" width="50" height="50" />
                         </a>
-                        <span class="navbar-text">Bienvenido</span>
-                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" onClick={()=>this.cerrarSesion()}>Cerrar sesión</button>
+                        <span className="navbar-text">Bienvenido</span>
+                        <button className="btn btn-outline-danger my-2 my-sm-0" type="submit" onClick={()=>this.cerrarSesion()}>Cerrar sesión</button>
                     </div>
                 </nav>
             </div>
