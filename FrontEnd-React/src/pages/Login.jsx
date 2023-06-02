@@ -33,17 +33,21 @@ class Login extends Component{
             return response.data;
         })
         .then(response => {
+            console.log(response)
             if(response.length > 0){
-                const { admin } = response[1];
                 const { token } = response[0];
-                if(admin == 1){
-                    window.location.href="./homeAdmin";
+                const decode = jwtDecode(token)
+                if(decode.admin == 1){
+                    //window.location.href="./homeAdmin";
                 }else{
-                    window.location.href="./home";
+                    //window.location.href="./home";
                 }
+                console.log(decode)
                 cookies.set('token', token, {path:'/'});
-                cookies.set('admin', admin, {path:'/'});
-                // cookies.set('id', respuesta.id, {path:'/'});
+                cookies.set('admin', decode.admin, {path:'/'});
+                cookies.set('id', decode.id, {path:'/'});
+                cookies.set('email', decode.email, {path:'/'});
+                cookies.set('name', decode.name, {path:'/'});
                 // cookies.set('nombre', respuesta.nombre, {path:'/'});
                 // cookies.set('apellidos', respuesta.apellidos, {path:'/'});
                 // cookies.set('username', respuesta.username, {path:'/'});
