@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { newRegistro } from "../pages/server";
+import { newRegistro } from "./SupplierRestSoap";
 import "../styles/Schedule.css";
 
 const cookies = new Cookies();

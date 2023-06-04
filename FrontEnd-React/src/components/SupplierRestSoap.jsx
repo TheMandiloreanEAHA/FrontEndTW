@@ -10,8 +10,6 @@ const getregistroByAula = async (aulaId) => {
     return await fetch(`${API_URL}${aulaId}`);
 };
 
-
-
 const newRegistro = async (aula,nombre,fecha,hora) => {
     const json = {
         aula: aula,
@@ -33,20 +31,6 @@ const newRegistro = async (aula,nombre,fecha,hora) => {
         .catch((error) => {
             console.log(error);
         });
-    // const auxJson = {
-    //         aula:"aula",
-    //         nombre:"nombre",
-    //         fecha:"fecha",
-    //         hora:"hora"
-    //     }
-    // console.log(auxJson)
-    // return await fetch(API_URL, {
-    //     method:'POST',
-    //     headers:{
-    //         'Content-Type':'application/json'
-    //     },
-    //     body: auxJson
-    // });
 };
 
 const deleteRegistro = async (registroId) => {
