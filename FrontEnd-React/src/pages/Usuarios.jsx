@@ -1,51 +1,272 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Cookies from "universal-cookie";
+
+
 const Usuarios = () => { 
+
+    const cookies = new Cookies();
+    const [usuarios, setUsuarios] = useState([]);
+    const API_URL = "https://intellidoorbackend-production.up.railway.app/users"
+
+    let config = {
+      headers: {
+        Authorization: cookies.get("token"),
+      },
+    };
+
+    const listaUsuarios = async () =>{
+        await axios
+        .get(API_URL, config)
+        .then((response) => {
+        return response.data;
+        })
+        .then((response) => {
+            setUsuarios(response);
+        })
+        .catch((error) => {
+        console.log(error);
+        });
+    };
+
+    useEffect(() => {
+        listaUsuarios();
+    });
+
+
+    const postUsuario = async (nombre,email,password,admin) =>{
+        const json ={
+            name: nombre,
+            email: email,
+            password: password,
+            admin: admin
+        }
+        await axios
+        .post(API_URL,json, config)
+        .then((response) => {
+        return response.data;
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+        console.log(error);
+        });
+    };
+
+    const deleteUsuario = async (id) =>{
+        const aux = API_URL+`/${id}`
+        await axios
+        .delete(aux, config)
+        .then((response) => {
+        console.log('Usuario eliminado');
+        return response.data;
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+        console.log(error);
+        });
+
+
+    };
+
     
-    // const [usuarios, setUsuarios] = useState([]);
 
-    // const listaRegistros = async () =>{
-    //     try{
-    //         const data = await (await getAllRegistros()).json();
-    //         setRegistros(data.data);
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // };
+    // -------------MODAL--------------------------------
+    const [nombre, setNombre] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [admin, setAdmin] = useState(false);
 
-    // useEffect(() => {
-    //     listaRegistros();
-    //     // eslint-disable-next-line
-    // });
+    const guardarUsuario = () => {
+      postUsuario(nombre, email, password, admin);
+      console.log("Usuario guardado");
+      closeModal();
+    };
 
-    return(
-        <>
+    const closeModal = () => {
+      setNombre("");
+      setEmail("");
+      setPassword("");
+      setAdmin(false);
+    //   setShowModal(false);
+    };
+
+    return (
+      <>
         <div className="container">
-            <h1>Usuarios</h1>
+          <h1>Usuarios</h1>
         </div>
         <div className="container">
-            <table className="table table-bordered table-striped">
-                <thead className="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {usuarios.map((item) => (
+          <button
+            className="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#modal"
+          >
+            <i className="bi bi-plus"></i> Agregar
+          </button>
+          <br></br>
+
+          <table className="table table-bordered table-striped">
+            <thead className="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {usuarios.map((item) => (
                     <tr key={item.id}>
                         <td>{item.id}</td>
                         <td>{item.name}</td>
                         <td>{item.email}</td>
                         <td>{item.admin}</td>
-                        <td><button type="button">Eliminar</button></td>
+                        <td><button className="btn btn-danger" 
+                        onClick={() => deleteUsuario(item.id)}
+                            data-bs-toggle="modal2"
+                            data-bs-target="#modal2">
+                            Eliminar
+                        </button></td>
                     </tr>
-                    ))} */}
-                </tbody>
-            </table>
+                    ))}
+            </tbody>
+          </table>
         </div>
-        </>
+
+        {/* modal de agregar usuario */}
+        <div className="modal fade" id="modal">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Agregar Usuario</h4>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  onClick={closeModal}
+                  data-bs-dismiss="modal"
+                >
+                  &times;
+                </button>
+              </div>
+
+              <div className="modal-body">
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="nombre">Nombre:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="nombre"
+                      value={nombre}
+                      onChange={(e) => setNombre(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email:</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group form-check d-flex align-items-center">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="admin"
+                      checked={admin}
+                      onChange={(e) => setAdmin(e.target.checked)}
+                    />
+                    <label className="form-check-label" htmlFor="admin">
+                      Admin
+                    </label>
+                  </div>
+                </form>
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={guardarUsuario}
+                  data-bs-dismiss="modal"
+                >
+                  Aceptar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                  onClick={closeModal}
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Modal de eliminar usuario */}
+        {/* <div
+          className="modal fade show"
+          id="modal2"
+        //   style={{ display: "block" }}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmar eliminación</h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="modal2"
+                >
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>¿Estás seguro de que quieres eliminar el usuario?</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal2"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleEliminarUsuario}
+                  data-bs-dismiss="modal2"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div> */}
+      </>
     );
 }
 
