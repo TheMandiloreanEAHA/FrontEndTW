@@ -26,21 +26,23 @@ const Supplier = (props) => {
       const aux = [];
       response.forEach(element => {
         aux.push({
-          label: `Aula ${element.num}`,
+          label: `${element.num}`,
           value: `${element.id}`
         })
-        setData(aux)
       });
+      setData(aux)
     })
   },[])
 
-  console.log(data)
+  const handleSelectChange = ( { value, label } ) => {
+    const {dataSch, setDataSch, setCr} = props
+    const id = value
+    const num = label 
 
-  const handleSelectChange = ( { value } ) => {
-    const {dataSch, setDataSch} = props
     axios
     .get(url2, config)
     .then((response) => {
+      console.log(response)
       return response.data;
     })
     .then((response) => {
@@ -49,8 +51,9 @@ const Supplier = (props) => {
         if(element.crId == value){
           aux.push(element)
         }
-        setDataSch(aux)
       });
+      setDataSch(aux)
+      setCr({crId:id, crNum:num})
     })
   }
 

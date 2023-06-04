@@ -1,30 +1,58 @@
+import axios from "axios";
+
 const API_URL = "https://intermediariosoap-production.up.railway.app/registros";
 
-export const getAllRegistros = async () => {
+const getAllRegistros = async () => {
     return await fetch(API_URL);
 };
 
-export const getregistroByAula = async (aulaId) => {
+const getregistroByAula = async (aulaId) => {
     return await fetch(`${API_URL}${aulaId}`);
 };
 
-export const newRegistro = async (nuevoRegistro) => {
-    return await fetch(API_URL, {
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-            "aula":String(nuevoRegistro.aula),
-            "nombre":Array(nuevoCamion.nombre),
-            "fecha":String(nuevoCamion.fecha),
-            "hora":String(nuevoCamion.hora),
+
+
+const newRegistro = async (aula,nombre,fecha,hora) => {
+    const json = {
+        aula: aula,
+        nombre: nombre,
+        fecha: fecha,
+        hora: hora
+    }
+
+    console.log(json)
+
+    await axios
+        .post(API_URL, json)
+        .then((response) => {
+            return response.data;
         })
-    });
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    // const auxJson = {
+    //         aula:"aula",
+    //         nombre:"nombre",
+    //         fecha:"fecha",
+    //         hora:"hora"
+    //     }
+    // console.log(auxJson)
+    // return await fetch(API_URL, {
+    //     method:'POST',
+    //     headers:{
+    //         'Content-Type':'application/json'
+    //     },
+    //     body: auxJson
+    // });
 };
 
-export const deleteRegistro = async (registroId) => {
+const deleteRegistro = async (registroId) => {
     return await fetch(`${API_URL}${registroId}`, {
         method:'DELETE'
     });
 };
+
+export { getAllRegistros, getregistroByAula, newRegistro, deleteRegistro }

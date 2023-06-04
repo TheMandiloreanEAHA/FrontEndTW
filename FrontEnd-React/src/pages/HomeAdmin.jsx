@@ -5,7 +5,6 @@ import '../styles/HomeAdmin.css';
 // const cookies = new Cookies();
 
 class HomeAdmin extends Component { 
-   
     // componentDidMount(){
     //     if (!cookies.get("username")) {
     //         window.location.href="./";
@@ -23,5 +22,5 @@ class HomeAdmin extends Component {
             
         );
     }
- }
- export default HomeAdmin;
+}
+export default HomeAdmin;

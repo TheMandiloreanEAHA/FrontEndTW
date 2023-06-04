@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as server from "./server"
+import { getAllRegistros } from "./server"
 // import axios from 'axios';
 
 const HistorialSalones = () => {
@@ -8,7 +8,7 @@ const HistorialSalones = () => {
 
     const listaRegistros = async () =>{
         try{
-            const data = await (await server.getAllRegistros()).json();
+            const data = await (await getAllRegistros()).json();
             setRegistros(data.data);
         }catch(error){
             console.log(error);
