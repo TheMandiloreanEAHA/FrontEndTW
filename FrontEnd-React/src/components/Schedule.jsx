@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { newRegistro } from "../pages/server";
-import '../styles/Schedule.css';
+import "../styles/Schedule.css";
 
 const cookies = new Cookies();
 const url =
   "https://intellidoorbackend-production.up.railway.app/inuseclassrooms";
-const urlCr = "https://intellidoorbackend-production.up.railway.app/classrooms";
 
 let config = {
   headers: {
@@ -57,6 +56,10 @@ const Schedule = (props) => {
     var now = today.toLocaleDateString("es-MX");
     return now;
   };
+
+  const refrescar = () => {
+    location.reload()
+  }
 
   const reservar = async () => {
     let auxCrNum = classroom.crNum;
@@ -174,9 +177,31 @@ const Schedule = (props) => {
           </tr>
         </tbody>
       </table>
-      <button className="btn btn-primary btn-lg" onClick={reservar}>
+      <button className="btn btn-primary btn-lg" onClick={reservar} data-bs-toggle="modal" data-bs-target="#exampleModal">
         Reservar
       </button>
+
+      {/* model */}
+      <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Aula reservada con éxito</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={refrescar}>
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
