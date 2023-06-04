@@ -1,11 +1,12 @@
 import '../styles/NavBar.css';
-// import Cookies from "universal-cookie";
 import { Component } from 'react';
-import Logo from '../imgs/feiLogo.png';
+import Logo from '../imgs/uv.png';
+import Cookies from "universal-cookie";
 
-// const cookies = new Cookies();
+const cookies = new Cookies();
 
 class NavBar extends Component {
+
     cerrarSesion=()=>{
         // cookies.remove("id", {path:"/"});
         // cookies.remove("nombre", {path:"/"});
@@ -26,11 +27,10 @@ class NavBar extends Component {
                 <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">
-                            {/* <img src="" class="rounded-pill"/> */}
                             <img src={Logo} alt="logo" width="50" height="50" />
                         </a>
-                        <span className="navbar-text">Bienvenido</span>
-                        <button className="btn btn-outline-danger my-2 my-sm-0" type="submit" onClick={()=>this.cerrarSesion()}>Cerrar sesión</button>
+                        <a className="navbar-brand">Bienvenido {cookies.get("name")}</a>
+                        <button className="btn btn-danger my-2 my-sm-0" type="submit" onClick={()=>this.cerrarSesion()}>Cerrar sesión</button>
                     </div>
                 </nav>
             </div>

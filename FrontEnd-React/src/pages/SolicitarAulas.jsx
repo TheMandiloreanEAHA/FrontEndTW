@@ -1,6 +1,7 @@
 import Schedule from "../components/Schedule";
 import Supplier from "../components/Supplier";
 import React, { useState } from "react";
+import "../styles/SolicitarAulas.css"
 
 const SolicitarAulas = () => {
 
@@ -8,8 +9,8 @@ const SolicitarAulas = () => {
     const [classroom, setClassroom] = useState();
 
     return(
-        <div>
-            <h2>Solicitar aulas</h2>
+        <div className="solicitar-container">
+            <h1>Solicitar Aula</h1>
             <Supplier setDataSch = {setDataSchedule} dataSch = {dataSchedule} setCr = {setClassroom}></Supplier>
             <Schedule dataSch = {dataSchedule} classroom = {classroom}></Schedule>
         </div>

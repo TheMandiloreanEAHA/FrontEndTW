@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import Cookies from "universal-cookie";
 import axios from "axios";
+import '../styles/Supplier.css'
 
 const cookies = new Cookies();
 const url = "https://intellidoorbackend-production.up.railway.app/classrooms";
@@ -58,7 +59,8 @@ const Supplier = (props) => {
   }
 
   return (
-    <div className="Supplier-container">
+    <div className="supplier-container">
+      <h5>Aulas:</h5>
       <Select options={ data } onChange={ handleSelectChange }/>
     </div>
   );

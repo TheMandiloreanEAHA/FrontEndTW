@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getAllRegistros } from "./server"
-// import axios from 'axios';
 
 const HistorialSalones = () => {
   
