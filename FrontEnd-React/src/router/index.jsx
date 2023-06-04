@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import React from 'react';
 import LayoutPublic from "../layout/LayoutPublic";
-
 import Home from '../pages/Home';
 import About from '../pages/About';
 import Blog  from '../pages/Blog';
@@ -9,7 +8,6 @@ import NotFound from "../pages/NotFound";
 import SolicitarAulas from "../pages/SolicitarAulas";
 import Perfil from "../pages/Perfil";
 import Login from "../pages/Login";
-
 import LayoutAdmin from "../layout/LayoutAdmin";
 import HomeAdmin from "../pages/HomeAdmin";
 import Usuarios from "../pages/usuarios";
