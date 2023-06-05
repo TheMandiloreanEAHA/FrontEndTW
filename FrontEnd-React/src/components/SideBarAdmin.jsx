@@ -13,12 +13,7 @@ import { useState } from 'react';
 const SideBarAdmin = () => {
     const[isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const menuItem =[
-        {
-            path:"/homeAdmin",
-            name:"Pagina Principal",
-            icon: <FaMandalorian/>
-        },  
+    const menuItem =[ 
         {
             path:"/homeAdmin/usuarios",
             name:"Gestionar Usuarios",

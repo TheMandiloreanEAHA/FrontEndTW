@@ -6,10 +6,8 @@ import About from '../pages/About';
 import Blog  from '../pages/Blog';
 import NotFound from "../pages/NotFound";
 import SolicitarAulas from "../pages/SolicitarAulas";
-import Perfil from "../pages/Perfil";
 import Login from "../pages/Login";
 import LayoutAdmin from "../layout/LayoutAdmin";
-import HomeAdmin from "../pages/HomeAdmin";
 import Usuarios from "../pages/usuarios";
 import Salones from "../pages/Salones";
 import SalonesEnUso from "../pages/SalonesEnUso";
@@ -43,11 +41,6 @@ export const router = createBrowserRouter([
                 path: '/home/solicitarAulas',
                 element: <SolicitarAulas />,
             },
-            {
-                path: '/home/perfil',
-                element: <Perfil />,
-            },
-            
         ]
     },
     {
@@ -55,10 +48,6 @@ export const router = createBrowserRouter([
         element: <LayoutAdmin />,
         errorElement: <NotFound />,
         children: [
-            {
-                index: true,
-                element: <HomeAdmin />,                
-            },
             {
                 path: '/homeAdmin/usuarios',
                 element: <Usuarios />,
@@ -72,7 +61,7 @@ export const router = createBrowserRouter([
                 element: <SalonesEnUso />,
             },
             {
-                path: '/homeAdmin/historial',
+                index: true,
                 element: <HistorialSalones />,
             },
         ]

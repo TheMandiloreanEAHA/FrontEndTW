@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom'
 import {
     FaBars,
     FaTh,
-    FaUserAlt,
     FaMandalorian
 } from "react-icons/fa"
 import '../styles/SideBar.css'
@@ -21,11 +20,6 @@ const SideBar = () => {
             path:"/home/solicitarAulas",
             name:"Solicitar Aula",
             icon: <FaTh/>
-        },
-        {
-            path:"/home/perfil",
-            name:"Perfil",
-            icon: <FaUserAlt/>
         },
     ]
     return (

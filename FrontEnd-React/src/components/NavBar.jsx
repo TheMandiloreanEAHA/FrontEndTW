@@ -8,18 +8,8 @@ const cookies = new Cookies();
 class NavBar extends Component {
 
     cerrarSesion=()=>{
-        // cookies.remove("id", {path:"/"});
-        // cookies.remove("nombre", {path:"/"});
-        // cookies.remove("apellidos", {path:"/"});
-        // cookies.remove("username", {path:"/"});
         window.location.href="/";
     }
-
-    // componentDidMount(){
-    //     if (!cookies.get("username")) {
-    //         window.location.href="./";
-    //     }
-    // }
 
     render(){
         return (

@@ -38,7 +38,7 @@ class Login extends Component{
                 const { token } = response[0];
                 const decode = jwtDecode(token)
                 if(decode.admin == 1){
-                    window.location.href="./homeAdmin";
+                    window.location.href="./homeAdmin/historial";
                 }else{
                     window.location.href="./home";
                 }
