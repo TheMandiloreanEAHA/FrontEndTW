@@ -9,10 +9,11 @@ import {
 } from "react-icons/fa"
 import '../styles/SideBar.css'
 import { useState } from 'react';
-
+//se crea el componente del side bar del administrador
 const SideBarAdmin = () => {
     const[isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    //se crea un arreglo con los items de la side bar
     const menuItem =[ 
         {
             path:"/homeAdmin/usuarios",
@@ -30,11 +31,13 @@ const SideBarAdmin = () => {
             icon: <FaBuromobelexperte />
         },  
         {
-            path:"/homeAdmin/historial",
+            path:"/homeAdmin",
             name:"Historial de salones",
             icon: <FaRegListAlt />
         },
     ]
+    //se coloca el titulo y se establece la opción para ocultar o mostrar el side bar
+    //posteriormente se itera en el arreglo de items y por cada uno se coloca el elemento en la side bar que redirige a su respectivo path
     return (
         <div className="contenedor">
             <div style= {{width: isOpen ? "264px":"50px"}} className="sidebarAdmin">

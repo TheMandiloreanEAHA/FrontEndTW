@@ -6,11 +6,11 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class NavBar extends Component {
-
+    //metodo para cerrar sesión que te devuelve al login
     cerrarSesion=()=>{
         window.location.href="/";
     }
-
+    //se renderiza la nav bar la cual contiene el logo, el nombre del usuario logueado y el botón para cerrar sesión
     render(){
         return (
             <div className="contenedorNav">

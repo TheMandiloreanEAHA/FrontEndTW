@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { newRegistro } from "./SupplierRestSoap";
@@ -7,7 +7,7 @@ import "../styles/Schedule.css";
 const cookies = new Cookies();
 const url =
   "https://intellidoorbackend-production.up.railway.app/inuseclassrooms";
-
+//header que se envia para la autenticación
 let config = {
   headers: {
     Authorization: cookies.get("token"),
@@ -17,8 +17,10 @@ let config = {
 const Schedule = (props) => {
   const [time, setTime] = useState();
   const { dataSch, classroom } = props;
+  //del componente padre recibe los horarios en los que esta ocupada el aula, es un arreglo, así que itera entre ellos comparando
 
   dataSch.forEach((element) => {
+    //si alguno de los horarios esta en la base de datos entonces bloquea los checkboxes para que no se pueden re elegir
     switch (element.time) {
       case "7:00-9:00":
         document.getElementById("check1").disabled = true;
@@ -50,38 +52,36 @@ const Schedule = (props) => {
         break;
     }
   });
-
+  //función que toma la fecha local y la returna
   const getDate = () => {
     var today = new Date();
     var now = today.toLocaleDateString("es-MX");
     return now;
   };
-
+  //función que refresca la página
   const refrescar = () => {
     location.reload()
   }
-
+  //función que hace la petición de la reserva
   const reservar = async () => {
+    //extrae los datos necesarios para hacer la reserva, algunos los toma de los cookies, otros del componente padre y forma un JSON
     let auxCrNum = classroom.crNum;
     let auxCrId = classroom.crId;
     let auxUserId = cookies.get("id");
     let auxTime = time;
     let auxNombre = cookies.get("name");
     const auxJson = { crId: auxCrId, userId: auxUserId, time: auxTime };
-
+    //se hace la petición POST que recibe el JSON y el header de autenticación
     await axios
       .post(url, auxJson, config)
       .then((response) => {
         return response.data;
       })
       .then((response) => {
+        //si el API responde que se vieron tuplas afectadas procedemos a hacer el registro en el API SOAP
         const rows = response.affectedRows;
         if (rows == 1) {
-          console.log(auxCrNum);
-          console.log(auxNombre);
-          console.log(getDate());
-          console.log(time);
-          //
+          //aquí se llama al metodo que hace la request al API SOAP
           newRegistro(auxCrNum, auxNombre, getDate(), time);
         }
       })
@@ -89,11 +89,11 @@ const Schedule = (props) => {
         console.log(error);
       });
   };
-
+  //se guarda la hora seleccionada por el usuario en un state
   const handleChange = (data) => {
     setTime(data);
   };
-
+  //finalmente en el return se pinta una tabla la cual contiene los horarios
   return (
     <div className="schedule-container">
       <h5>Horarios:</h5>
@@ -181,7 +181,7 @@ const Schedule = (props) => {
         Reservar
       </button>
 
-      {/* model */}
+      {/* se crea un model que es llamado al precionar el botón, da retroalimentación que se hizo con exito la reserva */}
       <div class="modal" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">

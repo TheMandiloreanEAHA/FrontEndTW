@@ -6,10 +6,11 @@ import {
 } from "react-icons/fa"
 import '../styles/SideBar.css'
 import { useState } from 'react';
-
+// se crea el componente side bar
 const SideBar = () => {
     const[isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    //se crea un arreglo con los items que tendra el menu
     const menuItem =[
         {
             path:"/home",
@@ -22,6 +23,8 @@ const SideBar = () => {
             icon: <FaTh/>
         },
     ]
+    //se coloca el titulo y la opción de ampliar el side bar
+    //se itera entre los elemento y por cada uno se coloca el icono, se establece el path al que redirige
     return (
         <div className="contenedor">
             <div style= {{width: isOpen ? "264px":"56px"}} className="sidebar">

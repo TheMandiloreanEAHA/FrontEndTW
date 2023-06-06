@@ -33,7 +33,6 @@ const Usuarios = () => {
         listaUsuarios();
     });
 
-
     const postUsuario = async (nombre,email,password,admin) =>{
         const json ={
             name: nombre,
@@ -71,9 +70,6 @@ const Usuarios = () => {
 
 
     };
-
-    
-
     // -------------MODAL--------------------------------
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
@@ -91,7 +87,6 @@ const Usuarios = () => {
       setEmail("");
       setPassword("");
       setAdmin(false);
-    //   setShowModal(false);
     };
 
     return (
@@ -224,48 +219,6 @@ const Usuarios = () => {
             </div>
           </div>
         </div>
-
-        {/* Modal de eliminar usuario */}
-        {/* <div
-          className="modal fade show"
-          id="modal2"
-        //   style={{ display: "block" }}
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Confirmar eliminación</h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-bs-dismiss="modal2"
-                >
-                  <span>&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>¿Estás seguro de que quieres eliminar el usuario?</p>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal2"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={handleEliminarUsuario}
-                  data-bs-dismiss="modal2"
-                >
-                  Eliminar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </>
     );
 }

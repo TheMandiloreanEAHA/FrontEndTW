@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { getAllRegistros } from "../components/SupplierRestSoap"
-
+import React, { useEffect, useState } from "react";
+import { getAllRegistros } from "../components/SupplierRestSoap";
+//se crea el componente de nuestra página de historial de salones
 const HistorialSalones = () => {
-  
   const [registros, setRegistros] = useState([]);
+  //metodo que hace la llamada GET al API SOAP
+  const listaRegistros = async () => {
+    try {
+      //guardamos el resultado en una constante
+      const data = await (await getAllRegistros()).json();
+      //dichos registros se setean en el state
+      setRegistros(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const listaRegistros = async () =>{
-        try{
-            const data = await (await getAllRegistros()).json();
-            setRegistros(data.data);
-        }catch(error){
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        listaRegistros();
-        // eslint-disable-next-line
-    });
-
+  useEffect(() => {
+    listaRegistros();
+  });
+  //se crea una tabla, con sus headers, posteriormente se itera en el registro para meterlos en el body de la tabla
   return (
     <div className="container">
-      <h1>Tabla de Datos</h1>
+      <h1>Historial</h1>
       <table className="table table-bordered table-striped">
         <thead className="thead-dark">
           <tr>
