@@ -38,14 +38,13 @@ const Supplier = (props) => {
   },[])
   //cuando un elemento es seleccionado del select se llama este metodo 
   const handleSelectChange = ( { value, label } ) => {
-    const {dataSch, setDataSch, setCr} = props
+    const {setDataSch, setCr} = props
     const id = value
     const num = label 
     //hacemos un get al recurso de los salones en uso
     axios
     .get(url2, config)
     .then((response) => {
-      console.log(response)
       return response.data;
     })
     .then((response) => {
@@ -56,6 +55,7 @@ const Supplier = (props) => {
           aux.push(element)
         }
       });
+      console.log(aux)
       setDataSch(aux)
       setCr({crId:id, crNum:num})
     })

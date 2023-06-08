@@ -19,6 +19,23 @@ const Schedule = (props) => {
   const { dataSch, classroom } = props;
   //del componente padre recibe los horarios en los que esta ocupada el aula, es un arreglo, así que itera entre ellos comparando
 
+  if(dataSch.length>0){
+    document.getElementById("check1").disabled = false;
+    document.getElementById("text1").style.color = "black";
+    document.getElementById("check2").disabled = false;
+    document.getElementById("text2").style.color = "black";
+    document.getElementById("check3").disabled = false;
+    document.getElementById("text3").style.color = "black";
+    document.getElementById("check4").disabled = false;
+    document.getElementById("text4").style.color = "black";
+    document.getElementById("check5").disabled = false;
+    document.getElementById("text5").style.color = "black";
+    document.getElementById("check6").disabled = false;
+    document.getElementById("text6").style.color = "black";
+    document.getElementById("check7").disabled = false;
+    document.getElementById("text7").style.color = "black";
+  }
+
   dataSch.forEach((element) => {
     //si alguno de los horarios esta en la base de datos entonces bloquea los checkboxes para que no se pueden re elegir
     switch (element.time) {
@@ -52,6 +69,7 @@ const Schedule = (props) => {
         break;
     }
   });
+
   //función que toma la fecha local y la returna
   const getDate = () => {
     var today = new Date();
@@ -60,8 +78,8 @@ const Schedule = (props) => {
   };
   //función que refresca la página
   const refrescar = () => {
-    location.reload()
-  }
+    location.reload();
+  };
   //función que hace la petición de la reserva
   const reservar = async () => {
     //extrae los datos necesarios para hacer la reserva, algunos los toma de los cookies, otros del componente padre y forma un JSON
@@ -177,25 +195,35 @@ const Schedule = (props) => {
           </tr>
         </tbody>
       </table>
-      <button className="btn btn-primary btn-lg" onClick={reservar} data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button
+        className="btn btn-primary btn-lg"
+        onClick={reservar}
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
         Reservar
       </button>
 
       {/* se crea un model que es llamado al precionar el botón, da retroalimentación que se hizo con exito la reserva */}
-      <div class="modal" id="exampleModal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Aula reservada con éxito</h5>
+      <div className="modal" id="exampleModal" tabIndex="-1">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Aula reservada con éxito</h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={refrescar}>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+                onClick={refrescar}
+              >
                 Aceptar
               </button>
             </div>
